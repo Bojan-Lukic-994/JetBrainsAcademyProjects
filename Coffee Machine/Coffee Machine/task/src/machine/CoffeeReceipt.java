@@ -9,7 +9,7 @@ public class CoffeeReceipt {
     private final int cups;
     private final int money;
 
-    //constructor for class Coffee
+    //constructor for class CoffeeReceipt
     public CoffeeReceipt(int id, String name, int water, int milk, int coffeeBeans, int money) {
         this.id = id;
         this.name = name;
