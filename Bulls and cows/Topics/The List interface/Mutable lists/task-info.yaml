@@ -1,0 +1,24 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: List&lt;String&gt; list = List.of();
+- text: List&lt;String&gt; list = new ArrayList&lt;&gt;();
+- text: List&lt;String&gt; list = Arrays.asList();
+- text: List&lt;String&gt; list = new LinkedList&lt;&gt;();
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Task.java
+  visible: true
+  text: |
+    // You can experiment here, it won’t be checked
+
+    public class Task {
+      public static void main(String[] args) {
+        // put your code here
+      }
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/8399#comment
+status: Solved
+record: -1
