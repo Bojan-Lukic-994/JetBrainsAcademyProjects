@@ -14,8 +14,8 @@
   <ul> 
    <li><code class="language-java">E set(int index, E element)</code> replaces the element at the specified position in this list with the specified element and returns the element that was replaced;</li> 
    <li><code class="language-java">E get(int index)</code> returns the element at the specified position in the list;</li> 
-   <li><code class="language-java">int indexOf(Object obj)</code> returns the index of the first occurrence of the element in the list or <code class="language-java">-1</code> if there is no such index;</li> 
-   <li><code class="language-java">int lastIndexOf(Object obj)</code> returns the index of the last occurrence of the element in the list or <code class="language-java">-1</code> if there is no such index;<em style="color: #629755;"> </em></li> 
+   <li><code class="language-java">int indexOf(Object obj)</code> returns the index of the first occurrence of the element in the list or <code class="language-java">-1</code> if there is no such element;</li> 
+   <li><code class="language-java">int lastIndexOf(Object obj)</code> returns the index of the last occurrence of the element in the list or <code class="language-java">-1</code> if there is no such element;<em style="color: #629755;"> </em></li> 
    <li><code class="language-java">List&lt;E&gt; subList(int fromIndex, int toIndex)</code> returns a sublist of this list from <code class="language-java">fromIndex</code> included to<code class="language-java">toIndex</code> excluded.</li> 
   </ul> 
   <p>As you can see, the methods presume that a list is an ordered collection.</p> 
@@ -61,7 +61,7 @@ daysOfWeek.add("Holiday");   // throws UnsupportedOperationException</code></pre
   <p></p> 
   <p>Prior to Java 9, another way to create unmodifiable lists was the following:</p> 
   <pre><code class="language-java">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5);</code></pre> 
-  <p>To use it, the package <code class="language-java">java.util.Arrays</code> must be imported.</p> 
+  <p>To use it, the class <code class="language-java">java.util.Arrays</code> must be imported.</p> 
   <h5 style="text-align: center;">Mutable lists</h5> 
   <p>When you need to use a mutable list, you can take one of two commonly used mutable implementations of the <code class="language-java">List</code> interface.</p> 
   <p>One of them is familiar to you: the <code class="language-java">ArrayList&lt;E&gt;</code> class. It represents a resizable array. In addition to implementing the <code class="language-java">List</code> interface, it provides methods to manipulate the size of the array that is used internally. These methods are not needed in programs often, so it is better to use an object of this class through the <code class="language-java">List</code> interface.</p> 

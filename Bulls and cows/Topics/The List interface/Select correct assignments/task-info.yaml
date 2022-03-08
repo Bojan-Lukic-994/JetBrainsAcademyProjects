@@ -1,13 +1,11 @@
 type: choice
 is_multiple_choice: true
 options:
+- text: Collection&lt;Integer&gt; list = new ArrayList&lt;&gt;();
 - text: ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+- text: ' LinkedList&lt;Integer&gt; list = new ArrayList&lt;&gt;();'
 - text: LinkedList&lt;Integer&gt; list = new LinkedList&lt;&gt;(new ArrayList&lt;&gt;());
 - text: List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-- text: ' LinkedList&lt;Integer&gt; list = new ArrayList&lt;&gt;();'
-- text: Collection&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-message_correct: Congratulations!
-message_incorrect: Incorrect solution
 files:
 - name: src/Task.java
   visible: true

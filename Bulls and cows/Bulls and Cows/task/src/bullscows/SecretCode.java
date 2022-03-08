@@ -1,15 +1,14 @@
 package bullscows;
 
 public class SecretCode {
-    private final String secretCode;
 
-    //constructor for class SecretCode
-    public SecretCode(String secretCode) {
-        this.secretCode = secretCode;
+    private final String code;
+
+    public SecretCode(String code) {
+        this.code = code;
     }
 
-    //returns the secret code
-    public String getSecretCode() {
-        return secretCode;
+    public String getCode() {
+        return code;
     }
 }

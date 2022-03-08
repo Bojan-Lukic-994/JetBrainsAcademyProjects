@@ -83,35 +83,45 @@ public int compareTo(Integer anotherInteger) {
 public static int compare (int x, int y) {
     return (x &lt; y) ? -1 : ((x == y) ? 0 : 1);
 }</code></pre> 
-  <p>There are some other rules for implementing the <code class="language-java">compareTo()</code> method. To demonstrate them, imagine we have a class called <code class="language-java">Rectangle:</code></p> 
-  <pre><code class="language-java">class Rectangle implements Comparable&lt;Rectangle&gt; {
-    private int width;
-    private int height;
+  <p>There are some other rules for implementing the <code class="language-java">compareTo()</code> method. To demonstrate them, imagine we have a class called <code class="language-java">Coin:</code></p> 
+  <pre><code class="language-java">class Coin implements Comparable&lt;Coin&gt; {
+    private final int nominalValue;    // nominal value
+    private final int mintYear;        // the year the coin was minted
 
-    public Rectangle(int width, int height) {
-        this.width = width;
-        this.height = height;
+    Coin(int nominalValue, int mintYear) {
+        this.nominalValue = nominalValue;
+        this.mintYear = mintYear;
     }
 
     @Override
-    public int compareTo(Rectangle other) {
+    public int compareTo(Coin other) {
         // This method we have to implement
     }
 
-    // getters and setters
+    // We consider two coins equal if they have the same nominal value
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) return true;
+        if (that == null || getClass() != that.getClass()) return false;
+        Coin coin = (Coin) that;
+        return nominalValue == coin.nominalValue;
+    }
+
+    // getters, setters, hashCode and toString
 }</code></pre> 
-  <p>Let's create some objects of <code class="language-java">Rectangle</code>.</p> 
+  <p>Let's create some objects of <code class="language-java">Coin</code>.</p> 
   <pre><code class="language-java">public static void main(String[] args) {
-    Rectangle big = new Rectangle(6, 5);
-    Rectangle medium1 = new Rectangle(6, 2);
-    Rectangle medium2 = new Rectangle(2, 6);
-    Rectangle small = new Rectangle(3, 2);
+
+    Coin big = new Coin(25, 2006);
+    Coin medium1 = new Coin(10, 2016);
+    Coin medium2 = new Coin(10, 2001);
+    Coin small = new Coin(2, 2000);
 }</code></pre> 
   <p>One of the rules is to keep the <code class="language-java">compareTo()</code> implementation consistent with the implementation of the <code class="language-java">equals()</code> method. For example:</p> 
   <ul> 
    <li><code class="language-java">medium1.compareTo(medium2) == 0</code> should have the same boolean value as <code class="language-java">medium2.equals(medium1)</code></li> 
   </ul> 
-  <p>If we compare our rectangles and <code class="language-java">big</code>is bigger than <code class="language-java">medium1</code>and <code class="language-java">medium2</code>is bigger than <code class="language-java">small</code>, then <code class="language-java">big</code>is bigger than <code class="language-java">small</code>:</p> 
+  <p>If we compare our coins and <code class="language-java">big</code>is bigger than <code class="language-java">medium1</code>and <code class="language-java">medium2</code>is bigger than <code class="language-java">small</code>, then <code class="language-java">big</code>is bigger than <code class="language-java">small</code>:</p> 
   <ul> 
    <li><code class="language-java">(big.compareTo(medium1) &gt; 0 &amp;&amp; medium1.compareTo(small) &gt; 0)</code> implies <code class="language-java">big.compareTo(small) &gt; 0</code></li> 
   </ul> 
@@ -124,33 +134,42 @@ public static int compare (int x, int y) {
    <li><code class="language-java">medium1.compareTo(medium2) == 0</code> implies that <code class="language-java">big.compareTo(medium1) &gt; 0</code> and <code class="language-java">big.compareTo(medium2) &gt; 0</code> or <code class="language-java">small.compareTo(medium1) &lt; 0</code> and <code class="language-java">small.compareTo(medium2) &lt; 0</code> </li> 
   </ul> 
   <p>This will ensure that we can safely use such objects in sorted sets and sorted maps.</p> 
-  <p>In this case, we can comply with all these requirements if we compare our rectangles by their area calculated as <code class="language-java">width * height:</code></p> 
-  <pre><code class="language-java">class Rectangle implements Comparable&lt;Rectangle&gt; {
+  <p>In this case, we can comply with all these requirements if we compare our coins by their nominal value:</p> 
+  <pre><code class="language-java">class Coin implements Comparable&lt;Coin&gt; {
 
-    // fields, constructor, getters and setters
+    // fields, constructor, equals, hashCode, getters and setters
 
     @Override
-    public int compareTo(Rectangle other) {
-        return Integer.compare(width * height, other.width * other.height);
+    public int compareTo(Coin other) {
+        if (nominalValue == other.nominalValue) {
+            return 0;
+        } else if (nominalValue &lt; other.nominalValue) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
     @Override
     public String toString() {
-        return "Rectangle{w=" + width + ", h=" + height + "}";
+        return "Coin{nominal=" + nominalValue + ", year=" + mintYear + "}";
     }
 }</code></pre> 
-  <p>Now we can add the rectangles to a list and sort them:</p> 
-  <pre><code class="language-java">List&lt;Rectangle&gt; rectangles = new ArrayList&lt;&gt;();
+  <p>Now we can add the coins to a list and sort them:</p> 
+  <pre><code class="language-java">List&lt;Coin&gt; coins = new ArrayList&lt;&gt;();
 
-rectangles.add(big);
-rectangles.add(medium1);
-rectangles.add(medium2);
-rectangles.add(small);
+coins.add(big);
+coins.add(medium1);
+coins.add(medium2);
+coins.add(small);
 
-Collections.sort(rectangles);
-System.out.println(rectangles);</code></pre> 
-  <p>In the output, we can see that the rectangles have been successfully sorted:</p> 
-  <pre><code class="language-no-highlight">[Rectangle{w=3, h=2}, Rectangle{w=6, h=2}, Rectangle{w=2, h=6}, Rectangle{w=6, h=5}]</code></pre> 
+Collections.sort(coins);
+coins.forEach(System.out::println);</code></pre> 
+  <p>In the output, we can see that the coins have been successfully sorted:</p> 
+  <pre><code class="language-no-highlight">Coin{nominal=2, year=2000}
+Coin{nominal=10, year=2016}
+Coin{nominal=10, year=2001}
+Coin{nominal=25, year=2006}</code></pre> 
   <h5>Conclusion</h5> 
   <p>In this topic, we explored how to use the <code class="language-java">Comparable</code> interface in our custom classes to define natural ordering algorithms. We also learned how to properly implement the <code class="language-java">compareTo</code> method.</p>
  </body>

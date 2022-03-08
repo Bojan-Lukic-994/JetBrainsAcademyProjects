@@ -6,8 +6,6 @@ options:
 - text: list1.equals(list3)
 - text: list2.equals(list3)
 - text: list3.equals(list4)
-message_correct: Congratulations!
-message_incorrect: Incorrect solution
 files:
 - name: src/Task.java
   visible: true

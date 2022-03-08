@@ -1,12 +1,10 @@
 type: choice
 is_multiple_choice: true
 options:
-- text: ' <b>list.size() </b> is 4'
-- text: ' <b>list.subList(0, 1)</b> includes two elements'
-- text: ' <b>list.get(3) </b> is "third"'
 - text: ' <b>list.contains("FIRST")</b> returns <b>false</b>'
-message_correct: Congratulations!
-message_incorrect: Incorrect solution
+- text: ' <b>list.subList(0, 1)</b> includes two elements'
+- text: ' <b>list.size() </b> is 4'
+- text: ' <b>list.get(3) </b> is "third"'
 files:
 - name: src/Task.java
   visible: true

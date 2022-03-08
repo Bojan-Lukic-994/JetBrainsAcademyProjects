@@ -1,24 +1,7 @@
-class Article implements Comparable<Article> {
-    private String title;
-    private int size;
+// write your answer here 
 
-    public Article(String title, int size) {
-        this.title = title;
-        this.size = size;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public int getSize() {
-        return this.size;
-    }
-
-    @Override
-    public int compareTo(Article otherArticle) {
-        return Comparator.comparing(Article::getSize)
-                .thenComparing(Article::getTitle)
-                .compare(this, otherArticle);
-    }
+public class Task {
+  public static void main(String[] args) {
+    // put your code here
+  }
 }
